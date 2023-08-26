@@ -12,7 +12,6 @@ class PixabayScreen extends StatefulWidget {
 
 class _PixabayScreenState extends State<PixabayScreen> {
   PixabayContoller contoller = Get.put(PixabayContoller());
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -31,30 +30,75 @@ class _PixabayScreenState extends State<PixabayScreen> {
           ),
           centerTitle: true,
         ),
-        body: FutureBuilder(
-          future: contoller.Call(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            } else if (snapshot.hasData) {
-              PixabayModel? c1 = snapshot.data;
+        body: Column(
+          children: [
+            SizedBox(height: 20,),
 
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Container(
-                        height: 300,
-                        width: double.infinity,
-                        child:
-                            Image.network("${c1.hits![index].largeImageUrl}")),
-                  );
+            Container(
+              color: Colors.grey,
+              height: 60,
+              width: double.infinity,
+              child: TextField(
+                style: TextStyle(color: Colors.black),
+                cursorColor: Colors.black,
+                textAlign: TextAlign.center,
+                controller: contoller.txtanimal,
+                decoration: InputDecoration(
+                    prefixIcon: IconButton(onPressed: () async {
+
+
+                    }, icon: Icon(Icons.settings,color: Colors.black,)),
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          contoller.animal.value = contoller.txtanimal.text;
+                        },
+                        icon: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        )),
+                    hintText: "Enter  Name",
+                    hintStyle: TextStyle(
+                      color: Colors.white,
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white))),
+              ),
+            ),
+
+
+            Expanded(
+              child: FutureBuilder(
+                future: contoller.Call(contoller.animal.value),
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  } else if (snapshot.hasData) {
+                    PixabayModel? c1 = snapshot.data;
+
+                    return ListView.builder(
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed("/Down", arguments: index);
+                            },
+                            child: Container(
+                                height: 300,
+                                width: double.infinity,
+                                child:
+                                    Image.network("${c1.hits![index].largeImageUrl}")),
+                          ),
+                        );
+                      },
+                      itemCount: c1!.hits!.length,
+                    );
+                  }
+                  return Container(child: CircularProgressIndicator());
                 },
-                itemCount: c1!.hits!.length,
-              );
-            }
-            return Container(child: CircularProgressIndicator());
-          },
+              ),
+            ),
+          ],
         ),
       ),
     );

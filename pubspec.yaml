@@ -38,6 +38,10 @@ dependencies:
   get: ^4.6.5
   sizer: ^2.0.15
   http: ^1.1.0
+  path_provider: ^2.0.12
+  google_fonts: ^4.0.3
+  timer_snackbar: ^0.0.3
+
 
 dev_dependencies:
   flutter_test:

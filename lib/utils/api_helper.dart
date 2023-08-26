@@ -9,8 +9,8 @@ class Api_Helper {
 
   Api_Helper._();
 
-  Future<PixabayModel> GetData() async {
-    String Link = "https://pixabay.com/api/?key=27278777-989ed1f6f6b0aad88a9350844&q=animal&image_type=photo&per_page=50";
+  Future<PixabayModel> GetData(String animal) async {
+    String Link = "https://pixabay.com/api/?key=27278777-989ed1f6f6b0aad88a9350844&q=$animal&image_type=photo&per_page=50";
     Uri uri = Uri.parse(Link);
 
     var response = await http.get(uri);

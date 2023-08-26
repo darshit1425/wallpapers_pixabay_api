@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pixabay_api/screen/pixabay/view/download.dart';
 import 'package:pixabay_api/screen/pixabay/view/pixabay_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -15,6 +16,10 @@ void main() {
             GetPage(
               name: '/',
               page: () => PixabayScreen(),
+            ),
+            GetPage(
+              name: '/Down',
+              page: () => DownloadScrren(),
             ),
           ],
         );
