@@ -94,7 +94,7 @@ class _PixabayScreenState extends State<PixabayScreen> {
                       itemCount: c1!.hits!.length,
                     );
                   }
-                  return Container(child: CircularProgressIndicator());
+                  return Center(child: Container(child: CircularProgressIndicator()));
                 },
               ),
             ),
