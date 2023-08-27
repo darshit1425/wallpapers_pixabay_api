@@ -49,21 +49,20 @@ class _PixabayScreenState extends State<PixabayScreen> {
                   textAlign: TextAlign.center,
                   controller: contoller.txtanimal,
                   decoration: InputDecoration(
-                      prefixIcon: IconButton(
-                          onPressed: () async {},
-                          icon: Icon(
-                            Icons.settings,
-                            color: Colors.black,
-                          )),
+                      prefixIcon: Icon(Icons.search),
                       suffixIcon: IconButton(
                           onPressed: () {
-                            contoller.animal.value = contoller.txtanimal.text;
+                            setState(() {
+                              contoller.animal.value = contoller.txtanimal.text;
+                              contoller.Call("${contoller.txtanimal.text}");
+                            });
+
                           },
                           icon: Icon(
                             Icons.search,
                             color: Colors.white,
                           )),
-                      hintText: "Enter  Name",
+                      hintText: "search wallpaper",
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),
@@ -111,3 +110,4 @@ class _PixabayScreenState extends State<PixabayScreen> {
     );
   }
 }
+
