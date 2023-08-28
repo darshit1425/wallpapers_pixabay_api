@@ -56,7 +56,6 @@ class _PixabayScreenState extends State<PixabayScreen> {
                               contoller.animal.value = contoller.txtanimal.text;
                               contoller.Call("${contoller.txtanimal.text}");
                             });
-
                           },
                           icon: Icon(
                             Icons.search,
@@ -110,4 +109,3 @@ class _PixabayScreenState extends State<PixabayScreen> {
     );
   }
 }
-
